@@ -1,4 +1,4 @@
-#include "shell.h"
+ #include "shell.h"
 /**
 * main - Simple Shell main function 
 * @ac: Count of argumnents
@@ -19,10 +19,14 @@ int main(int ac, char **argv)
 	{
    		line = read_line();
    		if (line == NULL) /* reache EOF ctr + D */
-   			return (status);
+   		{
+   			if(isatty(STDIN_FILENO))
+   			   write(STDOUT_FILENO,"\n", 1);
+		   	return (status);
+	    }
    			
-   			
-   		printf("%s", line);
+   		printf("%s\n", line);
+   		free(line);
      	/*command = tokenizer(line);
 
 	    status = _execute(command; argv); */
