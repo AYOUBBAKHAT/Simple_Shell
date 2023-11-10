@@ -27,7 +27,7 @@ char **tokenizer(char *line)
     command = malloc(sizeof(char *) * (cpt + 1));
     if (!command)
 	{
-	free(line) line = NULL;
+	free(line), line = NULL;
 	return (NULL);	
 	}
     token = strtok(line, DELIM);
@@ -43,4 +43,4 @@ char **tokenizer(char *line)
 
 
 }
-	
+		
