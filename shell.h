@@ -21,4 +21,6 @@ int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 
+/* tools.c */
+void freearray2D(char **array);
 #endif
