@@ -1,9 +1,9 @@
 #include "shell.h"
-
 int _execute(char **command, char **argv)
 {
         pid_t child;
         int status;
+
 	child = fork();
     	if (child == 0)
     	{
@@ -18,5 +18,5 @@ int _execute(char **command, char **argv)
         	waitpid(child, &status, 0);
         	freearray2D(command);
     	}
-    	return (WEXITSTATUS(status));
+    	return(WEXITSTATUS(status));
 }
