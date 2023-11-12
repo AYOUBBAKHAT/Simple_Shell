@@ -1,11 +1,10 @@
- #include "shell.h"
+#include "shell.h"
 /**
 * main - Simple Shell main function 
 * @ac: Count of argumnents
 * @av: Arguments
 *Return: 0 Always (success).
 */
-
 int main(int ac, char **argv)
 {
 	char *line = NULL, **command = NULL;
@@ -30,8 +29,12 @@ int main(int ac, char **argv)
      	   continue;
      	   
      	for (i=0; command[i]; i++)
-     	    printf("%s\n", command[i]);
-        
+     	{
+		    printf("%s\n", command[i]);
+		    free(command[i]), command[i] = NULL;
+		 }
+		free(command), command = NULL;
+     	
 	   /* status = _execute(command; argv); */
 	}
 
