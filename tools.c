@@ -11,7 +11,7 @@ void freearay2D(char **array)
         array[i] = NULL;
     }
 
-    free(arr), array = NULL;
+    free(array), array = NULL;
 }
 
 void print_error(char *name, char *cmd, int idx)
@@ -23,14 +23,13 @@ void print_error(char *name, char *cmd, int idx)
   /*write(STDERR_FILENO, char*str,int len)*/
   write (STDERR_FILENO, name, _strlen(name));
   write (STDERR_FILENO, ": ", 2);
-  write (STDERR_FILENO, index, _strlen(index);
+  write (STDERR_FILENO, index, _strlen(index));
   write (STDERR_FILENO, ": ", 2);
   write (STDERR_FILENO, cmd, _strlen(cmd));
   write (STDERR_FILENO, mssg, _strlen(mssg));
   
   free(index);
 }
-
 char * _itoa(int n)
 {
 	char buffer[20];
