@@ -11,7 +11,7 @@ char *_getpath(char *command)
 		{
 			if (stat(command, &st) == 0)
 				return (_strdup(command));
-			return (NUll);
+			return (NULL);
 		}
 	}
 	path_env = _getenv("PATH");
