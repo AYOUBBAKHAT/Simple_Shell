@@ -1,32 +1,41 @@
 #include "shell.h"
-
-int _execute(char **command, char **argv, int idx)
+char *_getpath(char *command)
 {
-	char *full_cmd;
-    pid_t child;
-    int status;
-    
-	full_cmd = _getpath(command[0]);
-	if (!full_cmd)
-	{
-		print_error(argv[0], command[0], idx);
-		freearray2D(command);
-		return (127);
-	}
-	child = fork();
-    	if (child == 0)
-    	{
-        	if (execve(command[0], command, environ) == -1)
-        	{
-        		free(full_cmd), full_cmd = NULL;
-        		freearray2D(command);
-        	}
-    	}
-    	else
-    	{
-        	waitpid(child, &status, 0);
-        	freearray2D(command);
-        	free(full_cmd), full_cmd = NULL;
-    	}
-    	return (WEXITSTATUS(status));
+    char *path_env, *full_cmd, *dir;
+    int i;
+    struct stat st;
+
+    for (i = 0; command[i]; i++)
+        if (command[i] == '/')
+        {
+            if (stat(command, &st) == 0)
+                return (_strdup(command));
+            return (NULL);
+        }
+
+    path_env = _getenv("PATH");
+    if (!path_env)
+        return (NULL);
+
+    dir = strtok(path_env, ":");
+    while (dir)
+    {
+        full_cmd = malloc(_strlen(dir) + _strlen(command) + 2);
+        if (full_cmd)
+        {
+            _strcpy(full_cmd, dir);
+            _strcat(full_cmd, "/");
+            _strcat(full_cmd, command);
+            if (stat(full_cmd, &st) == 0)
+            {
+                free(path_env);
+                return (full_cmd);
+            }
+            free(full_cmd), full_cmd = NULL;
+            dir = strtok(NULL, ":");
+        }
+    }
+    free(path_env);
+    return (NULL);
 }
+

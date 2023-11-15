@@ -20,6 +20,7 @@ char *_getpath(char *command)
 	dir = strtok(path_env, ":");
 	while (dir)
 	{
+		/*size = len(directory) + len(command) + 2 ('/' and '\0') */
 		full_cmd = malloc(_strlen(dir) + _strlen(command) + 2);
 		if (full_cmd)
 		{
