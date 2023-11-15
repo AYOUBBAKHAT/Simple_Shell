@@ -11,7 +11,8 @@ void freearay2D(char **array)
         array[i] = NULL;
     }
 
-    free(array), array = NULL;
+    free(array);
+    array = NULL;
 }
 
 void print_error(char *name, char *cmd, int idx)
