@@ -18,7 +18,7 @@ void freearray2D(char **array)
 
 void print_error(char *name, char *cmd, int idx)
 {
-    char *index, mssg[] = ": not found\n";
+char *index, mssg[] = ": not found\n";
 
     index = _itoa(idx);
 
