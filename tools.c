@@ -18,7 +18,7 @@ void freearray2D(char **array)
 
 void print_error(char *name, char *cmd, int idx)
 {
-char *index, mssg[] = ": not found\n";
+    char *index, mssg[] = ": not found\n";
 
     index = _itoa(idx);
 
@@ -63,6 +63,7 @@ void reverse_string(char *str, int len)
     while (start < end)
     {
         tmp = str[start];
+        str[start] = str[end];
         str[end] = tmp;
         start++;
         end--;
