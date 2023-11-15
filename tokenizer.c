@@ -5,7 +5,7 @@ char **tokenizer(char *line)
 	int i = 0, j = 0;
 	char *token, *tmp, **array = NULL;
 
-	if (!line == NULL)
+	if (line == NULL)
 		return (NULL);
 		
 	tmp = _strdup(line);
@@ -39,8 +39,6 @@ char **tokenizer(char *line)
     }
     array[i] = NULL;
     free(line), line = NULL;
-    return (command);
-
+    return (array);
 }
 		
-
