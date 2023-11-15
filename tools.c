@@ -1,5 +1,5 @@
 #include "shell.h"
-void freearay2D(char **array)
+void freearray2D(char **array)
 {
     int i;
     if (!array)
