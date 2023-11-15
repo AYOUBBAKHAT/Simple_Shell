@@ -1,5 +1,12 @@
 #include "shell.h"
-
+/**
+ * _execute - Execute a command.
+ * @command: The command to execute.
+ * @argv: The arguments passed to the shell.
+ * @idx: The index of the command in argv.
+ *
+ * Return: The exit status of the executed command.
+ */
 int _execute(char **command, char **argv, int idx)
 {
 	char *full_cmd;
