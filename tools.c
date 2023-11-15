@@ -19,7 +19,7 @@ void freearray2D(char **array)
 void print_error(char *name, char *cmd, int idx)
 {
     char *index, mssg[] = ": not found\n";
-  
+
     index = _itoa(idx);
 
     /* write(STDERR_FILENO, char*str,int len) */
@@ -37,7 +37,7 @@ char *_itoa(int n)
 {
     char buffer[20];
     int i = 0;
-  
+
     if (n == 0)
         buffer[i++] = '0';
     else
@@ -50,7 +50,7 @@ char *_itoa(int n)
     }
     buffer[i] = '\0';
     reverse_string(buffer, i);
-  
+
     return (_strdup(buffer));
 }
 
