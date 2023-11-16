@@ -1,69 +1,40 @@
 #include "shell.h"
-
-int is_builtin(char *command)
+char *_getpath(char *command)
 {
-	char *builtins[] = {
-		"exit", "env", "setenv",
-		"cd", NULL
-	};
+	char *path_env, *full_cmd, *dir;
 	int i;
-
-	for (i=0; builtins[i]; i++) 
-	{
-		if (_strcmp (command, builtins[i]) == 0)
-			return (1);
-	}
-	return (0);
-}
-
-void handle_builtin(char **command, char **argv, int *status, int idx)
-{
-
-	if (_strcmp(command[0], "exit") == 0)
-	    exit_shell(command, argv, status, idx);
+	struct stat st;
 	
-	else if (_strcmp(command[0], "env") == 0)
-		print_env(command, status);
-}
-
-void exit_shell(char **command, char **argv, int *status, int idx)
-{
-	int exit_value = (*status);
-	char *index, mssg[] =":exit: Illegal number:";
-	
-	if(command[1])
+	for (i = 0; command[i]; i++)
 	{
-		if (is_positive_number(command[1]))
+		if (command[i] == '/')
 		{
-			exit_value = _atoi(command[1]);
-		}
-		else
-		{
-		    index = _itoa(idx);
-		    write(STDERR_FILENO, argv[0], _strlen(argv[0]));
-		    write(STDERR_FILENO, ": ", 2);
-		    write(STDERR_FILENO, index, _strlen(index));
-		    write(STDERR_FILENO, mssg, _strlen(mssg));
-		    write(STDERR_FILENO, command[1], _strlen(command[1]));
-		    write(STDERR_FILENO, "\n", 1);
-		    free(index);
-		    freearray2D(command);
-			return;
+			if (stat(command, &st) == 0)
+				return (_strdup(command));
+			return (NULL);
 		}
 	}
-	freearray2D(command);
-	exit(exit_value);
-}
-
-void print_env(char **command, int *status)
-{
-	int i;
-	
-	for (i = 0; environ[i]; i++)
+	path_env = _getenv("PATH");
+	if (!path_env)
+		return (NULL);
+	dir = strtok(path_env, ":");
+	while (dir)
 	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-		write(STDOUT_FILENO, "\n", 1);
+		full_cmd = malloc(_strlen(dir) + _strlen(command) + 2);
+		if (full_cmd)
+		{
+			_strcpy(full_cmd, dir);
+			_strcat(full_cmd, "/");
+			_strcat(full_cmd, command);
+			if (stat(full_cmd, &st) == 0)
+			{
+				free(path_env);
+				return (full_cmd);
+			}
+			free(full_cmd), full_cmd = NULL;
+			dir = strtok(NULL, ":");
+		}
 	}
-	freearray2D(command);
-	*status = 0;
+	free(path_env);
+	return (NULL);
 }
