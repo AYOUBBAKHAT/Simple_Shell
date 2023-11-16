@@ -20,9 +20,11 @@ char *_getenv(char *variable);
 char *_getpath(char *command);
 
 void handle_builtin(char **command, char **argv, int *status, int idx);
-exit_shell(char **command, char **argv, int *status int idx);
+int exit_shell(char **command, char **argv, int *status int idx);
 void print_env(char **command, int *status);
 int is_builtin(char *command);
+int is_positive_number (char *str);
+int _atoi(char *str);
 
 char *_strdup(const char *str);
 int _strcmp(char *s1, char *s2);
