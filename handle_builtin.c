@@ -26,7 +26,7 @@ void handle_builtin(char **command, char **argv, int *status, int idx)
 		print_env(command, status);
 }
 
-void exit_shell(char **command, char **argv, int *status int idx)
+void exit_shell(char **command, char **argv, int *status, int idx)
 {
 	int exit_value = (*status);
 	char *index, mssg[] =":exit: Illegal number:";
