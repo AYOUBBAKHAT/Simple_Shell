@@ -1,5 +1,4 @@
 #include "shell.h"
-
 char *_strdup(const char *str)
 {
 	char *ptr;
@@ -7,6 +6,7 @@ char *_strdup(const char *str)
 
 	if (str == NULL)
 		return (NULL);
+
 	while (*str != '\0')
 	{
 		len++;
