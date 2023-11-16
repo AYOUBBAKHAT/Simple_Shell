@@ -1,50 +1,34 @@
 #include "shell.h"
 
-int is_builtin(char *command)
+/**
+ * main - Simple Shell main function
+ * @ac: Count of arguments
+ * @argv: Arguments
+ * Return: 0 Always (success).
+ */
+int main(int ac, char **argv)
 {
-	char *builtins[] = {
-	"exit", "env", "setenv",
-	"cd", NULL
-	};
-	int i;
+	char *line = NULL, **command = NULL;
+	int status = 0, idx = 0;
+	(void)ac;
 
-	for (i=0; builtins[i]; i++) 
+	while (1)
 	{
-		if (_strcmp (command, builtins[i]) == 0)
-			return (1);
+		line = read_line();
+		if (line == NULL) /* reached EOF ctrl + D */
+		{
+			if (isatty(STDIN_FILENO))
+				write(STDOUT_FILENO, "\n", 1);
+			return (status);
+		}
+		idx++;
+		command = tokenizer(line);
+		if (!command)
+			continue;
+			
+    if (is_builtin(command[0]))
+    	handle_builtin(command, argv, status, idx); 
+    else
+		status = _execute(command, argv, idx);
 	}
-	return (0);
 }
-
-void handle_builtin(char **command, char **argv, int status, int idx)
-{
-	(void) argv;
-	(void) idx;
-	
-	if (_strcmp(command[0], "exit") == 0)
-	    exit_shell(command, status);
-	
-	else if (_strcmp(command[0], "env") == 0)
-		print_env(command, status);
-}
-
-void exit_shell(char **command, int status)
-{
-	freearray2D(command);
-	exit(status);
-}
-
-void print_env (char **command, int status)
-{
-	int i;
-	(void) status;
-	
-	for (i = 0; environ[i]; i++)
-	{
-		write(STDOUT_FILENO, environ[i], _strlen(environ[i]));
-		write(STDOUT_FILENO, "\n", 1);
-	}
-	freearray2D(command);
-}
-
-
