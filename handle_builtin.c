@@ -33,9 +33,9 @@ void exit_shell(char **command, char **argv, int *status, int idx)
 	
 	if(command[1])
 	{
-		if (is_positive_number[1]))
+		if (is_positive_number(command[1]))
 		{
-			exit_value = _atoi(comand[1]);
+			exit_value = _atoi(command[1]);
 		}
 		else
 		{
