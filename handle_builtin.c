@@ -16,7 +16,7 @@ int is_builtin(char *command)
 	return (0);
 }
 
-void handle_builtin(char **command, char **argv, int status, int idx)
+void handle_builtin(char **command, char **argv, int *status, int idx)
 {
 	(void) argv;
 	(void) idx;
@@ -28,16 +28,15 @@ void handle_builtin(char **command, char **argv, int status, int idx)
 		print_env(command, status);
 }
 
-void exit_shell(char **command, int status)
+void exit_shell(char **command, int *status)
 {
 	freearray2D(command);
-	exit(status);
+	exit(*status);
 }
 
-void print_env(char **command, int status)
+void print_env(char **command, int *status)
 {
 	int i;
-	(void) status;
 	
 	for (i = 0; environ[i]; i++)
 	{
@@ -45,6 +44,7 @@ void print_env(char **command, int status)
 		write(STDOUT_FILENO, "\n", 1);
 	}
 	freearray2D(command);
+	*status = 0;
 }
 
 
