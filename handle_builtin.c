@@ -31,16 +31,16 @@ void exit_shell(char **command, char **argv, int *status, int idx)
 	int exit_value = (*status);
 	char *index, mssg[] =":exit: Illegal number:";
 	
-	if(command[1])
+	if (command[1])
 	{
-		if (is_positive_number[1]))
+		if (is_positive_number(command[1]))
 		{
-			exit_value = _atoi(comand[1]);
+			exit_value = _atoi(command[1]);
 		}
 		else
 		{
-			index = _itoa(idx);
-			write(STDERR_FILENO, argv[0], _strlen(argv[0]));
+		    index = _itoa(idx);
+		    write(STDERR_FILENO, argv[0], _strlen(argv[0]));
 		    write(STDERR_FILENO, ": ", 2);
 		    write(STDERR_FILENO, index, _strlen(index));
 		    write(STDERR_FILENO, mssg, _strlen(mssg));
