@@ -12,9 +12,9 @@ int is_builtin(char *command)
 	for (i = 0; builtins[i]; i++)
 	{
 		if (_strcmp(command, builtins[i]) == 0)
-			return (1);
+			return 1;
 	}
-	return (0);
+	return 0;
 }
 
 /* Function to handle built-in commands */
@@ -45,7 +45,7 @@ void exit_shell(char **command, char **argv, int *status, int idx)
 			write(STDERR_FILENO, ": ", 2);
 			write(STDERR_FILENO, index, _strlen(index));
 			write(STDERR_FILENO, mssg, _strlen(mssg));
-			write(STDERR_FILENO, command[1], _strlen(command[1]));  
+			write(STDERR_FILENO, command[1], _strlen(command[1])); 
 			write(STDERR_FILENO, "\n", 1);
 			free(index);
 			freearray2D(command);
