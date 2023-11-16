@@ -19,11 +19,6 @@ int _execute(char **command, char **argv, int idx);
 char *_getenv(char *variable);
 char *_getpath(char *command);
 
-int is_builtin(char *command);
-void handle_builtin(char **command, char **argv, int status, int idx);
-void exit_shell(char **command, int status)
-void print_env (char **command, int status);
-
 char *_strdup(const char *str);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *s);
